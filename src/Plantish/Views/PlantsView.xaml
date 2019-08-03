@@ -1,0 +1,90 @@
+﻿<?xml version="1.0"
+      encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ViewModels="clr-namespace:Plantish.ViewModels;assembly=Plantish"
+             mc:Ignorable="d"
+             x:Class="Plantish.Views.PlantsView"
+             BackgroundColor="{StaticResource MainAppColor}">
+    <ContentPage.Content>
+        <Grid Padding="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <ImageButton Grid.Row="0"
+                         Source="add.png"
+                         Aspect="AspectFit"
+                         Scale="0.3"
+                         Margin="0,-25,-25,0"
+                         CornerRadius="50"
+                         BackgroundColor="{StaticResource ButtonsColor}"
+                         HorizontalOptions="End" />
+            <CollectionView Grid.Row="1">
+                <CollectionView.ItemsLayout>
+                    <ListItemsLayout ItemSpacing="20">
+                        <x:Arguments>
+                            <ItemsLayoutOrientation>Vertical</ItemsLayoutOrientation>
+                        </x:Arguments>
+                    </ListItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type ViewModels:PlantViewModel}">
+                        <ViewModels:PlantViewModel Name="Purple Rose"
+                                                   ImageUrl="https://ae01.alicdn.com/kf/HTB13kt_RVXXXXcSXXXXq6xXFXXXr/5d-diy-diamond-painting-flowers-purple-rose-diamond-painting-bloemen-diamond-embroidery-mosaic-flowers-painting-rhinestones.jpg_640x640.jpg" 
+                                                   WhenToWater="Every week"/>
+                        <ViewModels:PlantViewModel Name="Ilex verticillata"
+                                                   ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhKRG7kiMY9gihS8gSTfuASylMhyDJjr9h9I8mwEIwGIaDIHbUkw" 
+                                                   WhenToWater="Every second week"/>
+                        <ViewModels:PlantViewModel Name="Sanguinaria"
+                                                   ImageUrl="https://www.studyread.com/wp-content/uploads/2016/04/sanguinaria-300x252.jpg?ezimgfmt=ng:webp/ngcb1" 
+                                                   WhenToWater="Every week"/>
+<ViewModels:PlantViewModel Name="Lotus"
+                                                   ImageUrl="https://images-na.ssl-images-amazon.com/images/I/51mUIhGuV1L._SX425_.jpg" 
+                                                   WhenToWater="Once a month"/>
+<ViewModels:PlantViewModel Name="Cactus"
+                                                   ImageUrl="https://cdn.shopify.com/s/files/1/2203/9263/products/Notocactus_magnificus_Balloon_Cactus_1.jpg?v=1532468983"
+                                                   WhenToWater="Once a year"/>
+                     </x:Array>
+                </CollectionView.ItemsSource>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{StaticResource ButtonsColor}" CornerRadius="50" Padding="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0"
+                                       HorizontalOptions="CenterAndExpand"
+                                       FontSize="Title"
+                                       Text="{Binding Name}" />
+                                <Label Grid.Column="0" Grid.Row="1" HorizontalOptions="CenterAndExpand" FontSize="Caption" Text="{Binding WhenToWater}"/>
+                                <Frame Grid.Column="1"
+                                       Grid.Row="0"
+                                       Grid.RowSpan="2"
+                                       CornerRadius="50"
+                                       IsClippedToBounds="True"
+                                       Padding="0"
+                                       Margin="0"
+                                       BackgroundColor="Transparent">
+                                    <Image Source="{Binding ImageUrl}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="100"
+                                           WidthRequest="100" />
+                                </Frame>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

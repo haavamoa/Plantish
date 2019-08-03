@@ -1,16 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0"
+      encoding="utf-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:Views="clr-namespace:Plantish.Views;assembly=Plantish"
-            mc:Ignorable="d"
-            x:Class="Plantish.Views.AppShell"
-             BackgroundColor="{StaticResource MainAppColor}"
-             >
-   <TabBar Title="Plantish">
-       <Tab>
-           <ShellContent ContentTemplate="{DataTemplate Views:MainPage}"/>
-       </Tab>
-   </TabBar>
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:Views="clr-namespace:Plantish.Views;assembly=Plantish"
+       mc:Ignorable="d"
+       x:Class="Plantish.Views.AppShell"
+       NavBarIsVisible="False"
+       TabBarBackgroundColor="#4D593B"
+       TabBarTitleColor="#B4BFA3"
+       TabBarUnselectedColor="#7C8C5A"
+       >
+    <TabBar>
+        <Tab Title="Plants" Icon="plant.png">
+            <ShellContent Title="Plants" ContentTemplate="{DataTemplate Views:PlantsView}" />
+        </Tab>
+        <Tab Title="Settings" Icon="settings.png">
+            <ShellContent ContentTemplate="{DataTemplate Views:SettingsView}" />
+        </Tab>
+    </TabBar>
 </Shell>
