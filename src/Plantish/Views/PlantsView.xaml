@@ -30,42 +30,65 @@
                         </x:Arguments>
                     </ListItemsLayout>
                 </CollectionView.ItemsLayout>
+                <!-- Replace this with the database items-->
                 <CollectionView.ItemsSource>
                     <x:Array Type="{x:Type ViewModels:PlantViewModel}">
                         <ViewModels:PlantViewModel Name="Purple Rose"
-                                                   ImageUrl="https://ae01.alicdn.com/kf/HTB13kt_RVXXXXcSXXXXq6xXFXXXr/5d-diy-diamond-painting-flowers-purple-rose-diamond-painting-bloemen-diamond-embroidery-mosaic-flowers-painting-rhinestones.jpg_640x640.jpg" 
-                                                   WhenToWater="Every week"/>
+                                                   ImageUrl="https://ae01.alicdn.com/kf/HTB13kt_RVXXXXcSXXXXq6xXFXXXr/5d-diy-diamond-painting-flowers-purple-rose-diamond-painting-bloemen-diamond-embroidery-mosaic-flowers-painting-rhinestones.jpg_640x640.jpg"
+                                                   WhenToWater="Every week" />
                         <ViewModels:PlantViewModel Name="Ilex verticillata"
-                                                   ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhKRG7kiMY9gihS8gSTfuASylMhyDJjr9h9I8mwEIwGIaDIHbUkw" 
-                                                   WhenToWater="Every second week"/>
+                                                   ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhKRG7kiMY9gihS8gSTfuASylMhyDJjr9h9I8mwEIwGIaDIHbUkw"
+                                                   WhenToWater="Every second week" />
                         <ViewModels:PlantViewModel Name="Sanguinaria"
-                                                   ImageUrl="https://www.studyread.com/wp-content/uploads/2016/04/sanguinaria-300x252.jpg?ezimgfmt=ng:webp/ngcb1" 
-                                                   WhenToWater="Every week"/>
-<ViewModels:PlantViewModel Name="Lotus"
-                                                   ImageUrl="https://images-na.ssl-images-amazon.com/images/I/51mUIhGuV1L._SX425_.jpg" 
-                                                   WhenToWater="Once a month"/>
-<ViewModels:PlantViewModel Name="Cactus"
+                                                   ImageUrl="https://www.studyread.com/wp-content/uploads/2016/04/sanguinaria-300x252.jpg?ezimgfmt=ng:webp/ngcb1"
+                                                   WhenToWater="Every week" />
+                        <ViewModels:PlantViewModel Name="Lotus"
+                                                   ImageUrl="https://images-na.ssl-images-amazon.com/images/I/51mUIhGuV1L._SX425_.jpg"
+                                                   WhenToWater="Once a month" />
+                        <ViewModels:PlantViewModel Name="Cactus"
                                                    ImageUrl="https://cdn.shopify.com/s/files/1/2203/9263/products/Notocactus_magnificus_Balloon_Cactus_1.jpg?v=1532468983"
-                                                   WhenToWater="Once a year"/>
-                     </x:Array>
+                                                   WhenToWater="Once a year" />
+                        <ViewModels:PlantViewModel Name="Apple"
+                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Malus_domestica_a1.jpg/220px-Malus_domestica_a1.jpg"
+                                                   WhenToWater="Once a month" />
+                        <ViewModels:PlantViewModel Name="Apocynum cannabinum"
+                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Apocynum_cannabinum_6801.JPG/220px-Apocynum_cannabinum_6801.JPG"
+                                                   WhenToWater="Once a week" />
+                        <ViewModels:PlantViewModel Name="Almond"
+                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ametllesjuliol.jpg/220px-Ametllesjuliol.jpg"
+                                                   WhenToWater="Once a month" />
+                        <ViewModels:PlantViewModel Name="Fraxinus pennsylvanica"
+                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Fraxinus_pensylvanica_a1.jpg/220px-Fraxinus_pensylvanica_a1.jpg"
+                                                   WhenToWater="Once a month" />
+                        <ViewModels:PlantViewModel Name="Acer negundo"
+                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Acnegundo.jpg/220px-Acnegundo.jpg"
+                                                   WhenToWater="Once a week" />
+                    </x:Array>
                 </CollectionView.ItemsSource>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BackgroundColor="{StaticResource ButtonsColor}" CornerRadius="50" Padding="5">
+                        <Frame BackgroundColor="{StaticResource ButtonsColor}"
+                               CornerRadius="50"
+                               Padding="5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
+                                    <RowDefinition />
+                                    <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <Label Grid.Column="0"
                                        HorizontalOptions="CenterAndExpand"
                                        FontSize="Title"
+                                       FontAttributes="Bold"
                                        Text="{Binding Name}" />
-                                <Label Grid.Column="0" Grid.Row="1" HorizontalOptions="CenterAndExpand" FontSize="Caption" Text="{Binding WhenToWater}"/>
+                                <Label Grid.Column="0"
+                                       Grid.Row="1"
+                                       HorizontalOptions="CenterAndExpand"
+                                       FontSize="Body"
+                                       Text="{Binding WhenToWater}" />
                                 <Frame Grid.Column="1"
                                        Grid.Row="0"
                                        Grid.RowSpan="2"
