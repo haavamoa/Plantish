@@ -10,7 +10,10 @@ using Xamarin.Forms;
 
 namespace Plantish.Droid
 {
-    [Activity(Label = "Plantish", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    /// <summary>
+    /// MainLauncher is <see cref="SplashActivity"/> to use a SplashScreen
+    /// </summary>
+    [Activity(Label = "Plantish", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
