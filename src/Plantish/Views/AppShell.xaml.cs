@@ -10,5 +10,10 @@ namespace Plantish.Views
         {
             InitializeComponent();
         }
+
+        public void OnStart()
+        {
+            PlantsView.OnStart();
+        }
     }
 }

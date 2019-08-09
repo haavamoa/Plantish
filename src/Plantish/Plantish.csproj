@@ -3,15 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <Nullable>enable</Nullable>
+      <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <WarningsAsErrors>NU1605;CS8618</WarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="LightInject" Version="5.5.0" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.618606" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
   </ItemGroup>

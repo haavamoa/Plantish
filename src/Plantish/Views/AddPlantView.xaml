@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"
+      encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ViewModels="clr-namespace:Plantish.ViewModels;assembly=Plantish"
+             mc:Ignorable="d"
+             BackgroundColor="{StaticResource MainAppColor}"
+             x:Class="Plantish.Views.AddPlantView"
+             Padding="5"
+             x:DataType="ViewModels:AddPlantViewModel">
+    <d:ContentPage.BindingContext>
+        <ViewModels:AddPlantViewModel/>
+    </d:ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Name" Text="{Binding Name}"/>
+            <Button Text="Take Photo" Command="{Binding TakePhotoCommand}"/>
+            <Image Source="{Binding NewPhotoSource}" />
+            <Button Text="Save" Command="{Binding SavePlantCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

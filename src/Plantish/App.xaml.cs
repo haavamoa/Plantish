@@ -7,16 +7,19 @@ namespace Plantish
 {
     public partial class App : Application
     {
+        private AppShell m_appShell;
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = m_appShell =  new AppShell();
         }
 
         protected override void OnStart()
         {
             // Handle when your app starts
+            m_appShell.OnStart();
         }
 
         protected override void OnSleep()

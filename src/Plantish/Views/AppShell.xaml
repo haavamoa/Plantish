@@ -14,10 +14,14 @@
        >
     <TabBar>
         <Tab Title="Plants" Icon="plant.png">
-            <ShellContent Title="Plants" ContentTemplate="{DataTemplate Views:PlantsView}" />
+            <ShellContent>
+                <Views:PlantsView x:Name="PlantsView"/>
+            </ShellContent>
         </Tab>
-        <Tab Title="Settings" Icon="settings.png">
-            <ShellContent ContentTemplate="{DataTemplate Views:SettingsView}" />
+        <Tab Title="Add Plant" Icon="add.png">
+            <ShellContent>
+                <Views:AddPlantView x:Name="AddPlantView"/>
+            </ShellContent>
         </Tab>
     </TabBar>
 </Shell>

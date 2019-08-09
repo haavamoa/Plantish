@@ -7,22 +7,14 @@
              xmlns:ViewModels="clr-namespace:Plantish.ViewModels;assembly=Plantish"
              mc:Ignorable="d"
              x:Class="Plantish.Views.PlantsView"
-             BackgroundColor="{StaticResource MainAppColor}">
+             BackgroundColor="{StaticResource MainAppColor}"
+             Padding="5"
+             x:DataType="ViewModels:PlantsViewModel">
+    <d:ContentPage.BindingContext>
+        <ViewModels:PlantsViewModel/>
+    </d:ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid Padding="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <ImageButton Grid.Row="0"
-                         Source="add.png"
-                         Aspect="AspectFit"
-                         Scale="0.3"
-                         Margin="0,-25,-25,0"
-                         CornerRadius="50"
-                         BackgroundColor="{StaticResource ButtonsColor}"
-                         HorizontalOptions="End" />
-            <CollectionView Grid.Row="1">
+        <CollectionView ItemsSource="{Binding Plants}">
                 <CollectionView.ItemsLayout>
                     <ListItemsLayout ItemSpacing="20">
                         <x:Arguments>
@@ -30,43 +22,8 @@
                         </x:Arguments>
                     </ListItemsLayout>
                 </CollectionView.ItemsLayout>
-                <!-- Replace this with the database items-->
-                <CollectionView.ItemsSource>
-                    <x:Array Type="{x:Type ViewModels:PlantViewModel}">
-                        <ViewModels:PlantViewModel Name="Purple Rose"
-                                                   ImageUrl="https://ae01.alicdn.com/kf/HTB13kt_RVXXXXcSXXXXq6xXFXXXr/5d-diy-diamond-painting-flowers-purple-rose-diamond-painting-bloemen-diamond-embroidery-mosaic-flowers-painting-rhinestones.jpg_640x640.jpg"
-                                                   WhenToWater="Every week" />
-                        <ViewModels:PlantViewModel Name="Ilex verticillata"
-                                                   ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhKRG7kiMY9gihS8gSTfuASylMhyDJjr9h9I8mwEIwGIaDIHbUkw"
-                                                   WhenToWater="Every second week" />
-                        <ViewModels:PlantViewModel Name="Sanguinaria"
-                                                   ImageUrl="https://www.studyread.com/wp-content/uploads/2016/04/sanguinaria-300x252.jpg?ezimgfmt=ng:webp/ngcb1"
-                                                   WhenToWater="Every week" />
-                        <ViewModels:PlantViewModel Name="Lotus"
-                                                   ImageUrl="https://images-na.ssl-images-amazon.com/images/I/51mUIhGuV1L._SX425_.jpg"
-                                                   WhenToWater="Once a month" />
-                        <ViewModels:PlantViewModel Name="Cactus"
-                                                   ImageUrl="https://cdn.shopify.com/s/files/1/2203/9263/products/Notocactus_magnificus_Balloon_Cactus_1.jpg?v=1532468983"
-                                                   WhenToWater="Once a year" />
-                        <ViewModels:PlantViewModel Name="Apple"
-                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Malus_domestica_a1.jpg/220px-Malus_domestica_a1.jpg"
-                                                   WhenToWater="Once a month" />
-                        <ViewModels:PlantViewModel Name="Apocynum cannabinum"
-                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Apocynum_cannabinum_6801.JPG/220px-Apocynum_cannabinum_6801.JPG"
-                                                   WhenToWater="Once a week" />
-                        <ViewModels:PlantViewModel Name="Almond"
-                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ametllesjuliol.jpg/220px-Ametllesjuliol.jpg"
-                                                   WhenToWater="Once a month" />
-                        <ViewModels:PlantViewModel Name="Fraxinus pennsylvanica"
-                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Fraxinus_pensylvanica_a1.jpg/220px-Fraxinus_pensylvanica_a1.jpg"
-                                                   WhenToWater="Once a month" />
-                        <ViewModels:PlantViewModel Name="Acer negundo"
-                                                   ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Acnegundo.jpg/220px-Acnegundo.jpg"
-                                                   WhenToWater="Once a week" />
-                    </x:Array>
-                </CollectionView.ItemsSource>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
+            <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="ViewModels:PlantViewModel">
                         <Frame BackgroundColor="{StaticResource ButtonsColor}"
                                CornerRadius="50"
                                Padding="5">
@@ -108,6 +65,5 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </Grid>
     </ContentPage.Content>
 </ContentPage>
