@@ -34,7 +34,7 @@ namespace Plantish.ViewModels {
             {
                 if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Camera))
                 {
-                    await App.Current.MainPage.DisplayAlert("Camera Permission", "Allow SavR to access your camera", "OK");
+                    await App.Current.MainPage.DisplayAlert("Camera Permission", "Allow Plantish to access your camera", "OK");
                 }
 
                 var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera });
@@ -43,6 +43,13 @@ namespace Plantish.ViewModels {
 
             if (status == PermissionStatus.Granted)
             {
+                if (!Plugin.Media.CrossMedia.Current.IsCameraAvailable || !Plugin.Media.CrossMedia.Current.IsTakePhotoSupported)
+                {
+                    await App.Current.MainPage.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                    return;
+                }
+
+
                 var newPhotoId  = Guid.NewGuid();
                 var file = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(
                     new StoreCameraMediaOptions() { Directory = "PlantsTemp", Name =  newPhotoId.ToString()});
