@@ -62,7 +62,7 @@ steps:
     serverEndpoint: 'Håvard Moås AppCenter Privat Github login'
     appSlug: '$(AppSlug)'
     appFile: 'src/Plantish.Android/bin/release/com.haavamoa.plantish.apk'
-    releaseNotesOption: 'input'
+    releaseNotesInput: '$(Build.SourceVersionMessage)'
     destinationType: 'store'
     destinationStoreId: '$(GoogleStoreBetaId)'
 
