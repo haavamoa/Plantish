@@ -23,7 +23,7 @@ steps:
    }
    
    Write-Host("Branch = $buildSourceBranch, Version = $tagVersion");
-   Write-Host ("##vso[task.setvariable variable=androidVersion;]$tagVersion")
+   Write-Output ("##vso[task.setvariable variable=androidVersion;]$tagVersion")
   displayName: 'Get Version from tag'
 
 - task: NuGetToolInstaller@1
