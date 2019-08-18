@@ -58,15 +58,13 @@ steps:
     apksignerKeystoreAlias: '$(keystore_alias)'
 
 - task: AppCenterDistribute@3
-  displayName: 'App Center Distribute'
   inputs:
     serverEndpoint: 'Håvard Moås AppCenter Privat Github login'
     appSlug: '$(AppSlug)'
     appFile: 'src/Plantish.Android/bin/release/com.haavamoa.plantish.apk'
-    symbolsOption: 'Android'
-    releaseNotesOption: 'input'
-    releaseNotesInput: 'First release test'
-    destinationType: 'groups'
-    distributionGroupId: '$(distributionGroupId)'
+    releaseNotesInput: '$(Build.SourceVersionMessage)'
+    destinationType: 'store'
+    destinationStoreId: '$(googleStoreBetaId)'
+
 
 
