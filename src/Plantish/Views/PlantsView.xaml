@@ -5,6 +5,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ViewModels="clr-namespace:Plantish.ViewModels;assembly=Plantish"
+             xmlns:Views="clr-namespace:Plantish.Views;assembly=Plantish"
              mc:Ignorable="d"
              x:Class="Plantish.Views.PlantsView"
              BackgroundColor="{StaticResource MainAppColor}"
@@ -23,45 +24,8 @@
                     </ListItemsLayout>
                 </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="ViewModels:PlantViewModel">
-                        <Frame BackgroundColor="{StaticResource ButtonsColor}"
-                               CornerRadius="50"
-                               Padding="5">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Column="0"
-                                       HorizontalOptions="CenterAndExpand"
-                                       FontSize="Title"
-                                       FontAttributes="Bold"
-                                       Text="{Binding Name}" />
-                                <Label Grid.Column="0"
-                                       Grid.Row="1"
-                                       HorizontalOptions="CenterAndExpand"
-                                       FontSize="Body"
-                                       Text="{Binding WhenToWater}" />
-                                <Frame Grid.Column="1"
-                                       Grid.Row="0"
-                                       Grid.RowSpan="2"
-                                       CornerRadius="50"
-                                       IsClippedToBounds="True"
-                                       Padding="0"
-                                       Margin="0"
-                                       BackgroundColor="Transparent">
-                                    <Image Source="{Binding ImageUrl}"
-                                           Aspect="AspectFill"
-                                           HeightRequest="100"
-                                           WidthRequest="100" />
-                                </Frame>
-
-                            </Grid>
-                        </Frame>
+                <DataTemplate x:DataType="ViewModels:PlantViewModel">
+                      <Views:PlantView BindingContext="{Binding .}"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

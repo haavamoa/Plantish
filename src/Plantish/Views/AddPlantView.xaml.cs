@@ -1,5 +1,6 @@
 ﻿using Plantish.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace Plantish.Views

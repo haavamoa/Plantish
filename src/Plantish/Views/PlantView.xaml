@@ -1,0 +1,55 @@
+﻿<?xml version="1.0"
+      encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ViewModels="clr-namespace:Plantish.ViewModels;assembly=Plantish"
+             xmlns:DebugRainbows="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+             xmlns:Converters="clr-namespace:Plantish.Resources.Converters;assembly=Plantish"
+             mc:Ignorable="d"
+             x:Class="Plantish.Views.PlantView"
+             x:DataType="ViewModels:PlantViewModel">
+    <Frame BackgroundColor="{StaticResource LightAppColor}"
+           CornerRadius="50"
+           Padding="5">
+        <Frame.Triggers>
+            <DataTrigger TargetType="Frame" Binding="{Binding IsOverdue}" Value="true">
+                <Setter Property="BackgroundColor" Value="{StaticResource RedAppColor}"></Setter>
+            </DataTrigger>
+        </Frame.Triggers>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Title"
+                   FontAttributes="None"
+                   Text="{Binding Name}" />
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Body"
+                   Text="{Binding NextWatering, Converter={Converters:DateRelativeToNowStringConverter}}" />
+            <Frame Grid.Column="1"
+                   Grid.Row="0"
+                   Grid.RowSpan="2"
+                   CornerRadius="50"
+                   IsClippedToBounds="True"
+                   Padding="0"
+                   Margin="0"
+                   BackgroundColor="Transparent">
+                <Image Source="{Binding ImageUrl}"
+                       Aspect="AspectFill"
+                       HeightRequest="100"
+                       WidthRequest="100" />
+            </Frame>
+        </Grid>
+    </Frame>
+</ContentView>

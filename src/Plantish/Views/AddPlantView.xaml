@@ -5,20 +5,124 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ViewModels="clr-namespace:Plantish.ViewModels;assembly=Plantish"
+             xmlns:Views="clr-namespace:Plantish.Views;assembly=Plantish"
+             xmlns:Converters="clr-namespace:Plantish.Resources.Converters;assembly=Plantish"
              mc:Ignorable="d"
              BackgroundColor="{StaticResource MainAppColor}"
              x:Class="Plantish.Views.AddPlantView"
-             Padding="5"
              x:DataType="ViewModels:AddPlantViewModel">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor"
+                    Value="{StaticResource LightAppColor}" />
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="TextColor"
+                    Value="{StaticResource LightAppColor}" />
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="TextColor"
+                    Value="{StaticResource LightAppColor}" />
+        </Style>
+        <Style TargetType="TimePicker">
+            <Setter Property="TextColor"
+                    Value="{StaticResource LightAppColor}" />
+        </Style>
+    </ContentPage.Resources>
     <d:ContentPage.BindingContext>
-        <ViewModels:AddPlantViewModel/>
+        <ViewModels:AddPlantViewModel />
     </d:ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Entry Placeholder="Name" Text="{Binding Name}"/>
-            <Button Text="Take Photo" Command="{Binding TakePhotoCommand}"/>
-            <Image Source="{Binding NewPhotoSource}" />
-            <Button Text="Save" Command="{Binding SavePlantCommand}" />
-        </StackLayout>
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0"
+                       Placeholder="Name"
+                       Text="{Binding Name}" />
+                <ImageButton Grid.Column="1"
+                             Source="camera.png"
+                             Command="{Binding TakePhotoCommand}"
+                             BackgroundColor="{StaticResource LightAppColor}"
+                             Aspect="AspectFit"
+                             CornerRadius="50"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Center"
+                             Padding="2"
+                             Scale="1.4" />
+            </Grid>
+            <Label Grid.Row="1"
+                   Text="How often does it need water?"
+                   FontSize="18" />
+            <StackLayout Grid.Row="2"
+                         Orientation="Horizontal">
+                <BoxView HorizontalOptions="Start"
+                         BackgroundColor="{StaticResource RedAppColor}"
+                         VerticalOptions="Center"
+                         HeightRequest="14"
+                         Margin="0,3,0,0"
+                         WidthRequest="2"
+                         Opacity="0">
+                    <BoxView.Triggers>
+                        <DataTrigger Binding="{Binding WaterFrequency}"
+                                     Value="0"
+                                     TargetType="BoxView">
+                            <Setter Property="Opacity"
+                                    Value="1" />
+                        </DataTrigger>
+                    </BoxView.Triggers>
+                </BoxView>
+                <Label x:Name="EveryLabel"
+                       Text="Every"
+                       VerticalOptions="Center"
+                       FontSize="18" />
+                <Entry Keyboard="Numeric"
+                       Text="{Binding WaterFrequency}"
+                       FontSize="18"
+                       VerticalOptions="Center" />
+                <Label Text="days"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       FontSize="18" />
+            </StackLayout>
+
+            <Label Grid.Row="3"
+                   Text="When was the last time you gave it water?"
+                   FontSize="18" />
+            <StackLayout Grid.Row="4"
+                         Orientation="Horizontal">
+                <DatePicker FontSize="18"
+                            Date="{Binding LastWateringDate}" />
+            </StackLayout>
+
+            <Frame Grid.Row="5"
+                   CornerRadius="10"
+                   BackgroundColor="Transparent"
+                   IsClippedToBounds="True"
+                   Padding="0">
+                <Image x:Name="NewPhotoImage"
+                       Source="{Binding NewPhotoSource}" />
+            </Frame>
+
+            <Button Grid.Row="5"
+                    Text="Save"
+                    HorizontalOptions="End"
+                    HeightRequest="60"
+                    WidthRequest="60"
+                    CornerRadius="30"
+                    Margin="0,0,5,25"
+                    Command="{Binding SavePlantCommand}"
+                    VerticalOptions="EndAndExpand" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -16,14 +16,20 @@ namespace Plantish.ViewModels {
         private Guid m_newPhotoId;
         private string m_tempPhotoPath;
         private string m_name;
+        private PlantViewModel? m_newPlant;
+        private int m_waterFrequency;
+        private DateTime m_lastWateringDate;
+        private TimeSpan m_lastWateringTime;
 
         public AddPlantViewModel()
         {
             TakePhotoCommand = new Command(async () => await TakePhoto());
-            SavePlantCommand = new Command(Save,() => !string.IsNullOrEmpty(Name));
+            SavePlantCommand = new Command(Save,() => !string.IsNullOrEmpty(Name) && WaterFrequency != 0);
                 m_tempPhotoPath = string.Empty;
             m_newPhotoId = Guid.Empty;
             m_name = string.Empty;
+            m_lastWateringDate = DateTime.Now;
+            m_lastWateringTime = m_lastWateringDate.TimeOfDay;
         }
 
         private async Task TakePhoto()
@@ -59,7 +65,7 @@ namespace Plantish.ViewModels {
                     return;
                 }
 
-                int index = file.Path.LastIndexOf("/");
+                var index = file.Path.LastIndexOf("/");
                 if (index > 0)
                 {
                     m_tempPhotoPath = file.Path.Substring(0, index);
@@ -68,7 +74,7 @@ namespace Plantish.ViewModels {
                 NewPhotoSource = ImageSource.FromFile(file.Path);
             }
         }
-
+    
         private void Save()
         {
             var fileName = m_newPhotoId + ".jpg";
@@ -96,6 +102,22 @@ namespace Plantish.ViewModels {
             {
                 m_newPhotoSource = value;
                 OnPropertyChanged();
+                UpdateNewPlant();
+            }
+        }
+
+        private void UpdateNewPlant()
+        {
+            NewPlant = new PlantViewModel(Name, WaterFrequency, LastWateringDate, NewPhotoSource);
+        }
+
+        public PlantViewModel? NewPlant
+        {
+            get => m_newPlant;
+            set
+            {
+                m_newPlant = value; 
+                OnPropertyChanged(nameof(NewPlant));
             }
         }
 
@@ -107,9 +129,32 @@ namespace Plantish.ViewModels {
             get => m_name;
             set
             {
-                m_name = value; 
+                m_name = value;
                 OnPropertyChanged();
                 ((Command)SavePlantCommand).ChangeCanExecute();
+                UpdateNewPlant();
+            }
+        }
+
+        public int WaterFrequency
+        {
+            get => m_waterFrequency;
+            set
+            {
+                m_waterFrequency = value;
+                OnPropertyChanged();
+                UpdateNewPlant();
+            }
+        }
+
+        public DateTime LastWateringDate
+        {
+            get => m_lastWateringDate;
+            set
+            {
+                m_lastWateringDate = value;
+                OnPropertyChanged();
+                UpdateNewPlant();
             }
         }
 

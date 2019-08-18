@@ -1,21 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Xamarin.Forms;
 
 namespace Plantish.ViewModels
 {
-    public class PlantViewModel
+    public class PlantViewModel : INotifyPropertyChanged
     {
-        public PlantViewModel(string name, string whenToWater, string imageUrl)
+        public PlantViewModel(string name, int wateringFrequency, DateTime lastWateringDate, ImageSource imageSource)
         {
             Name = name;
-            WhenToWater = whenToWater;
-            ImageUrl = imageUrl;
+            WateringFrequency = wateringFrequency;
+            LastWateringDate = lastWateringDate;
+            ImageUrl = imageSource;
+            NextWatering = LastWateringDate.AddDays(WateringFrequency);
         }
-        public string Name { get; set; }
 
-        public string ImageUrl { get; set; }
+        public DateTime LastWateringDate { get; }
 
-        public string WhenToWater { get; set; }
+        public string Name { get; }
+
+        public ImageSource ImageUrl { get; }
+
+        public int WateringFrequency { get; }
+
+        public DateTime NextWatering { get; }
+
+        public bool IsOverdue => DateTime.Now.Day > NextWatering.Day;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
