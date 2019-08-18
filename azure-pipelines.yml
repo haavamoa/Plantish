@@ -4,12 +4,11 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
 
 pool:
-  vmImage: 'macos-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
   outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
-  
 
 steps:
 
