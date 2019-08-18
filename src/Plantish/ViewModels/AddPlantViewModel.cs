@@ -12,11 +12,11 @@ using Xamarin.Forms;
 namespace Plantish.ViewModels {
     public class AddPlantViewModel : INotifyPropertyChanged
     {
-        private ImageSource? m_newPhotoSource;
+        private ImageSource m_newPhotoSource;
         private Guid m_newPhotoId;
         private string m_tempPhotoPath;
         private string m_name;
-        private PlantViewModel? m_newPlant;
+        private PlantViewModel m_newPlant;
         private int m_waterFrequency;
         private DateTime m_lastWateringDate;
         private TimeSpan m_lastWateringTime;
@@ -95,7 +95,7 @@ namespace Plantish.ViewModels {
             //Navigate to plants
 
         }
-        public ImageSource? NewPhotoSource
+        public ImageSource NewPhotoSource
         {
             get => m_newPhotoSource;
             private set
@@ -111,7 +111,7 @@ namespace Plantish.ViewModels {
             NewPlant = new PlantViewModel(Name, WaterFrequency, LastWateringDate, NewPhotoSource);
         }
 
-        public PlantViewModel? NewPlant
+        public PlantViewModel NewPlant
         {
             get => m_newPlant;
             set
@@ -160,7 +160,7 @@ namespace Plantish.ViewModels {
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

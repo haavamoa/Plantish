@@ -3,15 +3,13 @@
 # Add steps that test, sign, and distribute an app, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
 
-trigger:
-- master
-
 pool:
   vmImage: 'macos-latest'
 
 variables:
   buildConfiguration: 'Release'
   outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+  
 
 steps:
 - task: NuGetToolInstaller@1
@@ -20,11 +18,54 @@ steps:
   inputs:
     restoreSolution: '**/*.sln'
 
+- powershell: |
+   $buildSourceBranch = "$(Build.SourceBranch)"
+   $tagVersion = $buildSourceBranch.Substring($buildSourceBranch.LastIndexOf("/") + 2)
+   
+   $regex = "([0-9]+).([0-9]+).([0-9]+)(-pre([0-9]+))?$"
+   if(($tagVersion -match $regex) -eq $false) {
+       Write-Error "Tag version not in correct format; Expected x.y.z(-label) , actual $tagVersion"
+   }
+   
+   Write-Host("Branch = $buildSourceBranch, Version = $tagVersion");
+   Write-Host ("##vso[task.setvariable variable=androidVerion;]$tagVersion")
+  displayName: 'Get Version from tag'
+
+- task: android-manifest-version@1
+  inputs:
+    sourcePath: 'src/Plantish.Android/Properties/AndroidManifest.xml'
+    versionCodeOption: 'buildid'
+    versionCode: '$(Build.BuildId)'
+    versionName: '$(androidVersion)'
+    printFile: true
+
 - task: XamarinAndroid@1
   displayName: 'Build Android'
   inputs:
-    projectFile: src/Plantish/Plantish.Android/Plantish.Android.csproj
+    projectFile: src/Plantish.Android/Plantish.Android.csproj
     configuration: '$(BuildConfiguration)'
     createAppPackage: true
     msbuildVersionOption: latest
     msbuildArguments: ' /p:JavaSdkDirectory="$(JAVA_HOME)" '
+
+- task: AndroidSigning@3
+  displayName: 'Signing and aligning APK file(s) src/Plantish.Android/bin/release/*.apk'
+  inputs:
+    apkFiles: 'src/Plantish.Android/bin/release/*.apk'
+    apksignerKeystoreFile: 'hmo keystore.keystore'
+    apksignerKeystorePassword: '$(keystore_pw)'
+    apksignerKeystoreAlias: '$(keystore_alias)'
+
+- task: AppCenterDistribute@3
+  displayName: 'App Center Distribute'
+  inputs:
+    serverEndpoint: 'Håvard Moås AppCenter Privat Github login'
+    appSlug: '$(AppSlug)'
+    appFile: 'src/Plantish.Android/bin/release/com.haavamoa.plantish.apk'
+    symbolsOption: 'Android'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'First release test'
+    destinationType: 'groups'
+    distributionGroupId: '$(distributionGroupId)'
+
+

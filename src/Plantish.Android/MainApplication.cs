@@ -22,4 +22,6 @@ namespace Plantish.Droid {
             CrossCurrentActivity.Current.Init(this);
         }
     }
+#if DEBUG
 }
+#endif
