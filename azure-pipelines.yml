@@ -12,11 +12,6 @@ variables:
   
 
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '**/*.sln'
 
 - powershell: |
    $buildSourceBranch = "$(Build.SourceBranch)"
@@ -31,12 +26,18 @@ steps:
    Write-Host ("##vso[task.setvariable variable=androidVersion;]$tagVersion")
   displayName: 'Get Version from tag'
 
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '**/*.sln'
+
 - task: android-manifest-version@1
   inputs:
     sourcePath: 'src/Plantish.Android/Properties/AndroidManifest.xml'
     versionCodeOption: 'buildid'
     versionCode: '$(Build.BuildId)'
-    versionName: $(androidVersion)
+    versionName: '$(androidVersion)'
     printFile: true
 
 - task: XamarinAndroid@1
