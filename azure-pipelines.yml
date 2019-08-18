@@ -1,0 +1,30 @@
+# Xamarin.Android
+# Build a Xamarin.Android project.
+# Add steps that test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
+
+trigger:
+- master
+
+pool:
+  vmImage: 'macos-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '**/*.sln'
+
+- task: XamarinAndroid@1
+  displayName: 'Build Android'
+  inputs:
+    projectFile: src/Plantish/Plantish.Android/Plantish.Android.csproj
+    configuration: '$(BuildConfiguration)'
+    createAppPackage: true
+    msbuildVersionOption: latest
+    msbuildArguments: ' /p:JavaSdkDirectory="$(JAVA_HOME)" '
