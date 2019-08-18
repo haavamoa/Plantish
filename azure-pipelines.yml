@@ -28,7 +28,7 @@ steps:
    }
    
    Write-Host("Branch = $buildSourceBranch, Version = $tagVersion");
-   Write-Host ("##vso[task.setvariable variable=androidVerion;]$tagVersion")
+   Write-Host ("##vso[task.setvariable variable=androidVersion;]$tagVersion")
   displayName: 'Get Version from tag'
 
 - task: android-manifest-version@1
