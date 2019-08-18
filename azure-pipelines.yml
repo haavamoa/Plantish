@@ -36,7 +36,7 @@ steps:
     sourcePath: 'src/Plantish.Android/Properties/AndroidManifest.xml'
     versionCodeOption: 'buildid'
     versionCode: '$(Build.BuildId)'
-    versionName: '$(androidVersion)'
+    versionName: $(androidVersion)
     printFile: true
 
 - task: XamarinAndroid@1
