@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"
+      encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Views="clr-namespace:Plantish.Views;assembly=Plantish"
+             mc:Ignorable="d"
+             x:Class="Plantish.Views.MainPage"
+             BackgroundColor="{StaticResource MainAppColor}"
+             x:Name="this">
+    <ContentPage.Resources>
+        <x:UInt32 x:Key="speed">100000</x:UInt32>
+        <x:Int32 x:Key="range">100</x:Int32>
+        <x:String x:Key="easing">cubicin</x:String>
+        <x:Double x:Key="scale">3.0</x:Double>
+    </ContentPage.Resources>
+    <!-- Everything happens behind code -->
+    <Grid>
+        <Views:PlantsView x:Name="PlantsView"/>
+        <!--<Views:AddPlantView x:Name="AddPlantView" TranslationY="{Binding Source={x:Reference this}, Path=Height}"/>-->
+
+    </Grid>
+</ContentPage>

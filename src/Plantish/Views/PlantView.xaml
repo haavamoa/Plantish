@@ -7,15 +7,17 @@
              xmlns:ViewModels="clr-namespace:Plantish.ViewModels;assembly=Plantish"
              xmlns:DebugRainbows="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
              xmlns:Converters="clr-namespace:Plantish.Resources.Converters;assembly=Plantish"
-             mc:Ignorable="d"
+             mc:Ignorable="d dblend"
              x:Class="Plantish.Views.PlantView"
-             x:DataType="ViewModels:PlantViewModel">
+             x:DataType="ViewModels:PlantViewModel"
+             xmlns:dblend="http://schemas.microsoft.com/expression/blend/2008"
+             dblend:DataContext="{dblend:DesignInstance ViewModels:PlantViewModel}">
     <Frame BackgroundColor="{StaticResource LightAppColor}"
            CornerRadius="50"
            Padding="5">
         <Frame.Triggers>
             <DataTrigger TargetType="Frame" Binding="{Binding IsOverdue}" Value="true">
-                <Setter Property="BackgroundColor" Value="{StaticResource RedAppColor}"></Setter>
+                <Setter Property="BackgroundColor" Value="#BFA3A3"></Setter>
             </DataTrigger>
         </Frame.Triggers>
         <Grid>
@@ -29,9 +31,10 @@
             </Grid.RowDefinitions>
             <Label Grid.Column="0"
                    HorizontalOptions="CenterAndExpand"
-                   FontSize="Title"
-                   FontAttributes="None"
-                   Text="{Binding Name}" />
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   Text="{Binding Name}" 
+                   TextColor="White"/>
             <Label Grid.Column="0"
                    Grid.Row="1"
                    HorizontalOptions="CenterAndExpand"
@@ -44,7 +47,7 @@
                    IsClippedToBounds="True"
                    Padding="0"
                    Margin="0"
-                   BackgroundColor="Transparent">
+                   >
                 <Image Source="{Binding ImageUrl}"
                        Aspect="AspectFill"
                        HeightRequest="100"

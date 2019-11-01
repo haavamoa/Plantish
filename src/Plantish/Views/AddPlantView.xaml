@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0"
       encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,8 +10,9 @@
              mc:Ignorable="d"
              BackgroundColor="{StaticResource MainAppColor}"
              x:Class="Plantish.Views.AddPlantView"
-             x:DataType="ViewModels:AddPlantViewModel">
-    <ContentPage.Resources>
+             x:DataType="ViewModels:AddPlantViewModel"
+             BindingContext="{Binding Source={StaticResource ViewModelLocator}, Path=AddPlantViewModel}">
+    <ContentView.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor"
                     Value="{StaticResource LightAppColor}" />
@@ -28,11 +29,8 @@
             <Setter Property="TextColor"
                     Value="{StaticResource LightAppColor}" />
         </Style>
-    </ContentPage.Resources>
-    <d:ContentPage.BindingContext>
-        <ViewModels:AddPlantViewModel />
-    </d:ContentPage.BindingContext>
-    <ContentPage.Content>
+    </ContentView.Resources>
+    <ContentView.Content>
         <Grid Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -114,15 +112,51 @@
                        Source="{Binding NewPhotoSource}" />
             </Frame>
 
-            <Button Grid.Row="5"
-                    Text="Save"
-                    HorizontalOptions="End"
-                    HeightRequest="60"
-                    WidthRequest="60"
-                    CornerRadius="30"
-                    Margin="0,0,5,25"
-                    Command="{Binding SavePlantCommand}"
-                    VerticalOptions="EndAndExpand" />
+            <StackLayout Grid.Row="5"
+                         VerticalOptions="End"
+                         Orientation="Horizontal">
+                <ImageButton BackgroundColor="{StaticResource MainAppColor}"
+                             BorderColor="{StaticResource LightAppColor}"
+                             Command="{Binding DiscardPlantCommand}"
+                             BorderWidth="2"
+                             HorizontalOptions="StartAndExpand"
+                             Aspect="AspectFit"
+                             Padding="10"
+                             HeightRequest="60"
+                             WidthRequest="60"
+                             CornerRadius="30"
+                             Margin="10" />
+                <ImageButton BackgroundColor="{StaticResource MainAppColor}"
+                             BorderColor="{StaticResource LightAppColor}"
+                             BorderWidth="2"
+                             Source="confirmWithColor"
+                             Aspect="AspectFit"
+                             HorizontalOptions="EndAndExpand"
+                             Padding="10"
+                             HeightRequest="60"
+                             WidthRequest="60"
+                             CornerRadius="30"
+                             Margin="10"
+                             Command="{Binding SavePlantCommand}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity"
+                                            Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity"
+                                            Value="0.5" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </ImageButton>
+            </StackLayout>
+
         </Grid>
-    </ContentPage.Content>
-</ContentPage>
+    </ContentView.Content>
+</ContentView>

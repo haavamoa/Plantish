@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Plantish.Views;
 using Xamarin.Forms;
 
 namespace Plantish.ViewModels
@@ -10,12 +11,6 @@ namespace Plantish.ViewModels
         public PlantsViewModel()
         {
             Plants = new ObservableCollection<PlantViewModel>();
-            AddNewPlantCommand = new Command(NavigateToAddNewPlant);
-        }
-
-        private void NavigateToAddNewPlant()
-        {
-            Shell.Current.GoToAsync("newPlant");
         }
 
         public void Initialize()
@@ -24,7 +19,7 @@ namespace Plantish.ViewModels
                 new PlantViewModel(
                     "Purple Rose",
                     1,
-                    DateTime.Now, 
+                    DateTime.Now.AddDays(-2), 
                     "https://ae01.alicdn.com/kf/HTB13kt_RVXXXXcSXXXXq6xXFXXXr/5d-diy-diamond-painting-flowers-purple-rose-diamond-painting-bloemen-diamond-embroidery-mosaic-flowers-painting-rhinestones.jpg_640x640.jpg"));
             Plants.Add(
                 new PlantViewModel(
@@ -78,7 +73,5 @@ namespace Plantish.ViewModels
         }
 
         public ObservableCollection<PlantViewModel> Plants { get; }
-
-        public ICommand AddNewPlantCommand { get; }
     }
 }

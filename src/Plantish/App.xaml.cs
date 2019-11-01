@@ -1,4 +1,5 @@
 ﻿using System;
+using Plantish.ViewModels;
 using Plantish.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,19 +8,23 @@ namespace Plantish
 {
     public partial class App : Application
     {
-        private AppShell m_appShell;
 
         public App()
         {
             InitializeComponent();
+            TheFramework.TheFramework.Init();
+            var resource = Resources["ViewModelLocator"];
+            if (resource is ViewModelLocator viewModelLocator)
+            {
+                viewModelLocator.Initialize();
+            }
 
-            MainPage = m_appShell =  new AppShell();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
         {
             // Handle when your app starts
-            m_appShell.OnStart();
         }
 
         protected override void OnSleep()

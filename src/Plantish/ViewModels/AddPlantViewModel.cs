@@ -19,17 +19,28 @@ namespace Plantish.ViewModels {
         private PlantViewModel m_newPlant;
         private int m_waterFrequency;
         private DateTime m_lastWateringDate;
-        private TimeSpan m_lastWateringTime;
+        private Action m_navigateBackAction;
 
         public AddPlantViewModel()
         {
             TakePhotoCommand = new Command(async () => await TakePhoto());
             SavePlantCommand = new Command(Save,() => !string.IsNullOrEmpty(Name) && WaterFrequency != 0);
+            DiscardPlantCommand = new Command(Discard);
                 m_tempPhotoPath = string.Empty;
             m_newPhotoId = Guid.Empty;
             m_name = string.Empty;
             m_lastWateringDate = DateTime.Now;
-            m_lastWateringTime = m_lastWateringDate.TimeOfDay;
+        }
+
+        private void Discard()
+        {
+            m_navigateBackAction.Invoke();
+            Reset();
+        }
+
+        public void Initialize(Action navigateBackAction)
+        {
+            m_navigateBackAction = navigateBackAction;
         }
 
         private async Task TakePhoto()
@@ -75,7 +86,7 @@ namespace Plantish.ViewModels {
             }
         }
     
-        private void Save()
+        private async void Save()
         {
             var fileName = m_newPhotoId + ".jpg";
             var sourceFolder = m_tempPhotoPath + "/";
@@ -93,8 +104,19 @@ namespace Plantish.ViewModels {
             //Save guid + information into local database
 
             //Navigate to plants
-
+            m_navigateBackAction.Invoke();
+            //Reset all fields 
+            Reset();
         }
+
+        private void Reset()
+        {
+            Name = string.Empty;
+            WaterFrequency = 0;
+            LastWateringDate = DateTime.Now;
+            NewPlant = null;
+        }
+
         public ImageSource NewPhotoSource
         {
             get => m_newPhotoSource;
@@ -109,6 +131,7 @@ namespace Plantish.ViewModels {
         private void UpdateNewPlant()
         {
             NewPlant = new PlantViewModel(Name, WaterFrequency, LastWateringDate, NewPhotoSource);
+            ((Command)SavePlantCommand).ChangeCanExecute();
         }
 
         public PlantViewModel NewPlant
@@ -131,7 +154,6 @@ namespace Plantish.ViewModels {
             {
                 m_name = value;
                 OnPropertyChanged();
-                ((Command)SavePlantCommand).ChangeCanExecute();
                 UpdateNewPlant();
             }
         }
@@ -157,6 +179,8 @@ namespace Plantish.ViewModels {
                 UpdateNewPlant();
             }
         }
+
+        public ICommand DiscardPlantCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

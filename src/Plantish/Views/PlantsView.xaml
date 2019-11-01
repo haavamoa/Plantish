@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0"
       encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,12 +10,11 @@
              x:Class="Plantish.Views.PlantsView"
              BackgroundColor="{StaticResource MainAppColor}"
              Padding="5"
-             x:DataType="ViewModels:PlantsViewModel">
-    <d:ContentPage.BindingContext>
-        <ViewModels:PlantsViewModel/>
-    </d:ContentPage.BindingContext>
-    <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Plants}">
+             x:DataType="ViewModels:PlantsViewModel"
+             BindingContext="{Binding  PlantsViewModel,Source={StaticResource ViewModelLocator}}">
+    <ContentView.Content>
+        <Grid>
+            <CollectionView ItemsSource="{Binding Plants}">
                 <CollectionView.ItemsLayout>
                     <ListItemsLayout ItemSpacing="20">
                         <x:Arguments>
@@ -23,11 +22,25 @@
                         </x:Arguments>
                     </ListItemsLayout>
                 </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="ViewModels:PlantViewModel">
-                      <Views:PlantView BindingContext="{Binding .}"/>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="ViewModels:PlantViewModel">
+                        <Views:PlantView BindingContext="{Binding .}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-    </ContentPage.Content>
-</ContentPage>
+            <ImageButton Source="addWithColor"
+                         Clicked="AddPlantButton_OnClicked"
+                         HeightRequest="60"
+                         WidthRequest="60"
+                         CornerRadius="30"
+                         VerticalOptions="End"
+                         HorizontalOptions="End"
+                         Padding="10"
+                         BackgroundColor="{StaticResource MainAppColor}"
+                         BorderColor="{StaticResource LightAppColor}"
+                         BorderWidth="2"
+                         Margin="10"
+                         Aspect="AspectFit"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

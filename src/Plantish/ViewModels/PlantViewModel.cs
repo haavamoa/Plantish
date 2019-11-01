@@ -26,7 +26,7 @@ namespace Plantish.ViewModels
 
         public DateTime NextWatering { get; }
 
-        public bool IsOverdue => DateTime.Now.Day > NextWatering.Day;
+        public bool IsOverdue => DateTime.Now > NextWatering;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

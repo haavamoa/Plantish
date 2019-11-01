@@ -6,12 +6,20 @@ using Xamarin.Forms.Xaml;
 namespace Plantish.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddPlantView : ContentPage
+    public partial class AddPlantView : ContentView
     {
         public AddPlantView()
         {
             InitializeComponent();
-            BindingContext = new AddPlantViewModel();
+        }
+
+        public void OnStart()
+        {
+            if(App.Current.MainPage is MainPage mainPage)
+            {
+                ((AddPlantViewModel)BindingContext).Initialize( () => mainPage.ChangeContent<PlantsView>());
+            }
+            
         }
     }
 }

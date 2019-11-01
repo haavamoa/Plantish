@@ -13,15 +13,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LightInject" Version="5.5.0" />
+    <PackageReference Include="LightInject" Version="6.0.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.618606" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.0" />
     <PackageReference Include="Xamarin.Forms.DebugRainbows" Version="1.0.16" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="TheFramework">
+      <HintPath>..\..\..\FirstUIFramework.Forms\src\Framework\TheFramework\bin\Debug\netstandard2.0\TheFramework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\AppShell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\PlantsView.xaml">
@@ -30,8 +39,23 @@
     <EmbeddedResource Update="Views\PlantView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SettingsView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\AddPlantView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\PlantsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\PlantView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 </Project>

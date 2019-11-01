@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Plantish.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,19 +6,24 @@ using Xamarin.Forms.Xaml;
 namespace Plantish.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PlantsView : ContentPage
+    public partial class PlantsView : ContentView
     {
-        private PlantsViewModel m_plantsViewModel;
-
         public PlantsView()
         {
             InitializeComponent();
-            BindingContext = m_plantsViewModel =  new PlantsViewModel();
         }
 
         public void OnStart()
         {
-            m_plantsViewModel.Initialize();
+            ((PlantsViewModel)BindingContext).Initialize();
+        }
+
+        private void AddPlantButton_OnClicked(object sender, EventArgs e)
+        {
+            if(App.Current.MainPage is MainPage mainPage)
+            {
+                mainPage.ChangeContent<AddPlantView>();
+            }
         }
     }
 }
