@@ -21,10 +21,6 @@
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidKeyStore>false</AndroidKeyStore>
-    <AndroidSigningKeyStore>C:\Users\hmo\AppData\Local\Xamarin\Mono for Android\Keystore\hmo keystore\hmo keystore.keystore</AndroidSigningKeyStore>
-    <AndroidSigningStorePass>Coreman%12345678</AndroidSigningStorePass>
-    <AndroidSigningKeyPass>Coreman%12345678</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +34,8 @@
     <AotAssemblies>true</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
+    <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidSigningStorePass />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
